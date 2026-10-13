@@ -1,32 +1,12 @@
-# React + TypeScript + Vite
+# Ariel Eduardo Borbon Izaguirre 252116
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+¿por qué el Layout no necesita saber que es una tienda?
+porque el layout es solamente un componente, se usa para acomodar las cosas en las pantallas, como el encabezado o el pie o el contenido con children, este no ocupa nada de validaciones de negocio, ni que datos ocupa, basicamente sirve para reutilizarse en cualquier pagina
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+¿qué pasa si escribes onClick={onAgregar(producto)} sin la flecha?
+la funcion se va a ejecutar cada que el componente se renderice en lugar de cuando se haga click, por lo que esto podria ocasionar que se añadan cosas al carrito infinitamente, ya cuando se coloca el => react sabe solo se ejecute la funcion con el click
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+¿por qué con carrito.push(...) el contador no se mueve y no sale ningún error?
+con el carrito.push(...) se cambia el arreglo en la memoria JS, pero no se cambia la referencia del arreglo, cuando se llama a setCarrito(carrito) revisa la referencia vieja con la nueva y ve que son la misma direccion en memoria y piensa que nada cambio, asi que no renderiza de nuevo el componente, como no se pinta de nuevo el contador de la interfaz nunca se actualiza
